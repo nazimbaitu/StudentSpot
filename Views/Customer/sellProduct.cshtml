@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Sell Product";
+    Layout = "~/Views/_customer.cshtml";
+}
+<link href="~/css/sell-Product.css" rel="stylesheet" />
+<div class="product-wrapper">
+    <div class="product-box">
+
+        <h2 class="form-heading">Add New Product</h2>
+
+        <form class="product-form" method="post" enctype="multipart/form-data">
+
+            <!-- Product Name + Price -->
+            <div class="form-row">
+                <div class="field-block">
+                    <label class="field-label">Product Name</label>
+                    <input type="text" name="ProductName" class="field-input" placeholder="Enter product name">
+                </div>
+
+                <div class="field-block">
+                    <label class="field-label">Price</label>
+                    <input type="number" name="Price" class="field-input" placeholder="Enter price">
+                </div>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="field-block full-width">
+                <label class="field-label">Select Category</label>
+                <select name="CategoryId" class="field-input">
+                    <option value="">-- Choose Category --</option>
+
+                    <!-- Backend se yahan categories load hongi -->
+                    <option value="1">Category 1</option>
+                    <option value="2">Category 2</option>
+                    <option value="3">Category 3</option>
+
+                </select>
+            </div>
+
+            <!-- Description -->
+            <div class="field-block full-width">
+                <label class="field-label">Description</label>
+                <textarea name="Description" rows="4" class="field-input" placeholder="Write product description..."></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="field-block full-width">
+                <label class="field-label">Upload Image</label>
+                <input type="file" name="ProductImage" class="field-input">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Post Product</button>
+
+        </form>
+
+    </div>
+</div>
+

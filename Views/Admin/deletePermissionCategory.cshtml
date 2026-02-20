@@ -1,0 +1,99 @@
+﻿@model StudentSpot.Models.Category
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Category</title>
+    <style>
+        .container {
+            padding: 20px;
+            margin: 0 auto;
+            width: 60%;
+            font-family: Arial, sans-serif;
+        }
+
+        .heading {
+            text-align: center;
+            text-transform: uppercase;
+            color: red;
+            letter-spacing: 4px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .col-md-2,
+        .col-md-8 {
+            padding: 10px;
+        }
+
+        .col-md-2 {
+            flex: 1;
+        }
+
+        .col-md-8 {
+            flex: 4;
+        }
+
+        .list-group {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .list-group-item:last-child {
+                border-bottom: none;
+            }
+
+        .btn {
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .btn-danger {
+            background-color: red;
+        }
+
+        .btn-warning {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="heading">Are You Sure Want to Delete This Category?</h2>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <ul class="list-group">
+                    <li class="list-group-item">Category Id : @Model.category_id</li>
+                    <li class="list-group-item">Category : @Model.category_name</li>
+                </ul>
+
+                <a href="@Url.Action("deleteCategory", "Admin", new { id = Model.category_id })" class="btn btn-danger">Delete Category</a>
+                <a href="@Url.Action("fetchCategory", "Admin")" class="btn btn-warning">Back to List</a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+</body>
+</html>

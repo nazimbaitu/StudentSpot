@@ -1,0 +1,111 @@
+﻿@model StudentSpot.Models.BayNow
+
+@{
+    ViewData["Title"] = "Order Details";
+    var cart = Model.Cart;
+    var product = cart?.Products;
+    var customer = cart?.customers;
+}
+
+<h2>Order Details</h2>
+
+<!-- 💡 Full CSS Styling -->
+<style>
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .details-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .details-section {
+        margin-bottom: 30px;
+    }
+
+        .details-section h4 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: #007bff;
+        }
+
+    .detail-item {
+        margin-bottom: 10px;
+    }
+
+        .detail-item strong {
+            display: inline-block;
+            width: 150px;
+            color: #333;
+        }
+
+    .btn-back {
+        display: block;
+        width: fit-content;
+        margin: 30px auto 0;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="details-container">
+    <!-- 🧍 Customer Info -->
+    <div class="details-section">
+        <h4>Customer Information</h4>
+        <div class="detail-item"><strong>Name:</strong> @customer?.customer_name</div>
+        <div class="detail-item"><strong>Email:</strong> @customer?.customer_email</div>
+        <div class="detail-item"><strong>Phone:</strong> @customer?.customer_phone</div>
+        <div class="detail-item"><strong>Address:</strong> @customer?.customer_adress</div>
+    </div>
+
+    <!-- 📦 Product Info -->
+    <div class="details-section">
+        <h4>Product Information</h4>
+        <div class="detail-item"><strong>Product Name:</strong> @product?.product_name</div>
+        <div class="detail-item"><strong>Price:</strong> @product?.product_price</div>
+        <div class="detail-item"><strong>Quantity:</strong> @cart?.product_quantity</div>
+        @* <div class="detail-item"><strong>Total:</strong> @(product?.product_price * cart?.product_quantity)</div> *@
+    </div>
+
+    <!-- 🧾 Order Info -->
+    <div class="details-section">
+        <h4>Order Information</h4>
+        <div class="detail-item"><strong>Order ID:</strong> @Model.order_i</div>
+        <div class="detail-item"><strong>Cart ID:</strong> @cart?.cart_id</div>
+        <div class="detail-item">
+            <strong>Status:</strong>
+            @if (Model.Bay_status_id == 0)
+            {
+                <span class="badge bg-warning">Pending</span>
+            }
+            else if (Model.Bay_status_id == 1)
+            {
+                <span class="badge bg-success">Approved</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Unknown</span>
+            }
+        </div>
+    </div>
+
+    <a href="@Url.Action("FetchBayOrders", "Admin")" class="btn-back">← Back to Orders</a>
+</div>

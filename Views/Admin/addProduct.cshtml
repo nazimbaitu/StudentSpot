@@ -1,0 +1,130 @@
+﻿@model IEnumerable<StudentSpot.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .product-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+            .product-container h2 {
+                text-align: center;
+                color: #333;
+                text-transform: uppercase;
+                margin-bottom: 25px;
+            }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+            .form-group input[type="text"],
+            .form-group textarea,
+            .form-group input[type="number"],
+            .form-group select,
+            .form-group input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-group input[type="file"] {
+                padding: 6px;
+            }
+
+        .form-submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .form-submit-btn:hover {
+                background-color: #218838;
+            }
+
+        .image-preview {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+            .image-preview img {
+                max-width: 150px;
+                border-radius: 6px;
+            }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h2>Add New Product</h2>
+
+        <form asp-action="addProduct" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" name="product_name" placeholder="Enter Product Name" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="product_price" placeholder="Enter Product Price" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="product_description" placeholder="Enter Product Description" />
+            </div>
+
+            <div class="form-group">
+                <input type="file" name="product_image" id="product_image" accept="image/*" required />
+                <div class="image-preview" id="previewBox">
+                    <img id="previewImage" src="https://via.placeholder.com/150" alt="Preview">
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Partial("CategoryDropdown", ViewData["category"])
+            </div>
+
+            <input type="submit" value="Add Product" class="form-submit-btn" />
+        </form>
+    </div>
+
+    <script>
+        const input = document.getElementById("product_image");
+        const previewImage = document.getElementById("previewImage");
+
+        input.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model List<StudentSpot.Models.Product>
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var pro in Model)
+    {
+        <div class="product-card-main">
+            <div class="product-image-main">
+                <img src="@Url.Content("~/products_image/" + pro.product_image)"
+                     alt="@pro.product_name"
+                     style="width:100%; height:100%;" asp-append-version="true" />
+            </div>
+            <div class="product-info-main">
+                <div class="product-title-main">@pro.product_name</div>
+                <p class="product-description-main">
+                    @pro.product_description
+                    <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })"
+                       class="product-link-main">See more</a>
+                </p>
+
+                <!-- Price + Wishlist -->
+                <div class="price-wishlist-main">
+                    <span class="product-price-main"> @pro.product_price</span>
+
+                    <form method="post" asp-action="AddToWishlist" asp-controller="customer" class="wishlist-form-main">
+                        <input type="hidden" name="prod_id" value="@pro.product_id" />
+                        <button type="submit" class="wishlist-icon-main" style="background:none; border:none;">
+                            <i class="fas fa-heart"></i>  <!-- 🤍 Empty Heart -->
+                        </button>
+                    </form>
+                </div>
+
+                <div class="button-group-main">
+                    <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })"
+                       class="details-btn-main">View Details</a>
+                    <form method="post" asp-action="AddToCart" asp-controller="Customer" class="cart-form-main">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="prod_id" value="@pro.product_id" />
+                        <button type="submit" class="cart-btn-main">Add To Cart</button>
+                    </form>
+    
+
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <span class="no-products-message">No Products found.</span>
+}

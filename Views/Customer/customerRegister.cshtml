@@ -1,0 +1,24 @@
+﻿@model StudentSpot.Models.Customer
+@{
+    ViewData["Title"] = "customerRegister";
+    Layout = "~/Views/_customer.cshtml";
+}
+<link rel="stylesheet" href="~/css/customerRegister.css" />
+
+<div class="register-background">
+    <div class="hello">
+        @* <h2>Customer Register</h2> *@
+        <form id="customer-registration-form" class="registration-form" method="post" enctype="multipart/form-data">
+            <label>Name</label>
+            <input type="text" asp-for="customer_name" placeholder="Enter your Name" required />
+
+            <label>Email</label>
+            <input type="email" asp-for="customer_email" placeholder="Enter your Email" required />
+
+            <label>Password</label>
+            <input type="password" asp-for="customer_password" placeholder="Enter your password" required />
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>

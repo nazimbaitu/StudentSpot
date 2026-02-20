@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "fetchProducts_all";
+    Layout = "~/Views/_customer.cshtml";
+
+    var allProducts = (List<StudentSpot.Models.Product>)ViewData["product"];
+    @if (!string.IsNullOrEmpty(ViewBag.SelectedCategory))
+    {
+        <h2 class="section-title">
+            @ViewBag.SelectedCategory Products
+        </h2>
+    }
+    else
+    {
+        // <h2 class="section-title">All Pro</h2>
+    }
+
+    var sliderProducts = allProducts.Take(5).ToList();
+    // var categories = ViewData["category"] as List<StudentSpot.Models.Category>;
+}
+<!-- ===== Success alert for TempData message ===== -->
+@if (TempData["message"] != null)
+{
+    <div class="custom-alert">
+        <span class="custom-alert-icon">&#10004;</span> <!-- checkmark icon -->
+        @TempData["message"]
+        <button class="custom-alert-close" onclick="this.parentElement.style.display='none';">&times;</button>
+    </div>
+
+    <style>
+        .custom-alert {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px 40px 15px 15px;
+            background-color: #d4edda;
+            border: 1.5px solid #28a745;
+            border-radius: 8px;
+            color: #155724;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .custom-alert-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #28a745;
+            flex-shrink: 0;
+        }
+
+        .custom-alert-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #155724;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+            .custom-alert-close:hover {
+                color: #0b3d09;
+            }
+    </style>
+}
+
+<link rel="stylesheet" href="~/css/prodectsSlider.css" />
+
+<div class="amazon-slider-section">
+
+    <div class="amazon-slider" id="amazonSlider">
+        @foreach (var pro in sliderProducts)
+        {
+            <div class="amazon-slide">
+                <img src="~/products_image/@pro.product_image" />
+
+                <div class="slide-content">
+                    <h2>@pro.product_name</h2>
+                    <p>RS @pro.product_price</p>
+
+                    <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })"
+                       class="btn-view">View</a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="slider-btn left" onclick="prevSlide()">❮</button>
+    <button class="slider-btn right" onclick="nextSlide()">❯</button>
+    <script>
+        let currentIndex = 0;
+        const slider = document.getElementById("amazonSlider");
+        const slides = document.querySelectorAll(".amazon-slide");
+        const section = document.querySelector(".amazon-slider-section");
+
+        // Predefined background colors (you can change these)
+        const bgColors = [
+            "linear-gradient(120deg, #f6d365, #fda085)",
+            "linear-gradient(120deg, #a1c4fd, #c2e9fb)",
+            "linear-gradient(120deg, #fbc2eb, #a6c1ee)",
+            "linear-gradient(120deg, #84fab0, #8fd3f4)",
+            "linear-gradient(120deg, #fccb90, #d57eeb)"
+        ];
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            section.style.background = bgColors[currentIndex % bgColors.length];
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        setInterval(nextSlide, 5000);
+
+        updateSlider();
+    </script>
+
+</div>
+
+<!-- ================= All Products Grid ================= -->
+<div class="product-grid-main product-grid-full">
+    @await Html.PartialAsync("fetchProductsDropdown", allProducts)
+</div>

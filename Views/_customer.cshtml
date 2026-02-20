@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentSpot - Student E-commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+
+    <link rel="stylesheet" href="~/css/indexCustomer.css" />
+</head>
+<body>
+
+    <header>
+        <!-- Top Navbar -->
+        <div class="top-navbar">
+            <div class="container">
+                <div class="zello-logo-black">
+                    <div class="zello-logo-black">
+                        <a href="@Url.Action("Index", "Home")">
+                            @* <img src="~/logo/zello.png" alt="ZelloHub Logo" class="zello-logo-img" /> *@
+
+                        </a>
+                    </div>
+
+                    <span class="zello-text-black">ZelloHub</span>
+                </div>
+
+                <div class="search-bar">
+                    <form method="get" asp-action="Search" asp-controller="customer">
+                        <input type="text" name="query" placeholder="Search for products..."
+                               value="@ViewBag.SearchQuery" />
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+
+                
+
+
+
+
+                <!-- 🌐 Language Dropdown with Flag -->
+                <div class="flag-dropdown">
+                    <img src="~/pro_image/pakistaion.jpg" alt="PK" class="flag-icon" />
+                    <select onchange="changeLanguage(this.value)">
+                        <option value="English" selected>🇺🇸 EN</option>
+                        <option value="Urdu">🇵🇰 UR</option>
+                    </select>
+                </div>
+
+                <div class="auth-buttons">
+
+                      @if (Context.Session.GetString("customerSession") != null)
+            {
+                        <a href="@Url.Action("Logout", "Customer")" class="btn btn-sign">Logout</a>
+            }
+            else
+            {
+                    <a href="@Url.Action("customerLogin","customer")" class="btn btn-sign">Sign In</a>
+                    
+                    <a href="@Url.Action("customerRegister", "customer")" class="btn btn-sign">Sign Up</a>
+
+            }
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navbar -->
+        <nav class="main-navbar">
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="@Url.Action("Index", "customer")"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="@Url.Action("fetchProducts_all", "customer")"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="@Url.Action("fetchBlog", "customer")"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="@Url.Action("About", "customer")"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li>
+    <a href="@Url.Action("sellProduct", "customer")">
+        <i class="fas fa-store"></i> Sell Product
+    </a>
+</li>
+                    
+                    @* <li><a href="@Url.Action("fetchCart", "customer")"><i class="fas fa-shopping-cart"></i> Cart</a></li> *@
+
+                    <li><a href="@Url.Action("feedback", "customer")"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" onclick="toggleDropdown('categories')">
+                            <i class="fas fa-list"></i> Categories
+                        </a>
+                        <div class="dropdown-content" id="categories-dropdown">
+                            
+                                
+                            @await Html.PartialAsync("fetchlistcategory", (List<Category>)ViewData["category"])
+                        </div>
+                    </li>
+                    @* @await Html.PartialAsync("fetchlistcategory", (List<Category>)ViewData["category"]) *@
+                </ul>
+
+                <div class="nav-icons">
+                    <a href="@Url.Action("fetchCart", "customer")" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">1</span>
+                    </a>
+
+                    <div class="user-dropdown">
+                        <a class="dropdown-toggle" onclick="toggleDropdown('user')"><i class="fas fa-user-circle"></i> Customer</a>
+                        <div class="user-dropdown-content" id="user-dropdown">
+                            <a href="@Url.Action("customerProfile","customer")"><i class="fas fa-user"></i> Profile</a>
+                            <a href="#"><i class="fas fa-shopping-bag"></i> Orders</a>
+                            <a href="@Url.Action("Wishlist", "customer")"><i class="fas fa-heart"></i> Wishlist</a>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>  
+    <div>
+        @RenderBody()
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ZelloHub</h3>
+                    <p>Your one-stop shop for all student needs. We provide quality products at affordable prices for students everywhere.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="@Url.Action("fetchCart", "customer")">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Textbooks</a></li>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">School Supplies</a></li>
+                        <li><a href="#">Dorm Essentials</a></li>
+                        <li><a href="#">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get special offers and student discounts</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn-sign">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ZelloHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/js/indexCustomer.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function updateCartCount() {
+            $.ajax({
+                url: '@Url.Action("GetCartItemCount", "Customer")',
+                type: 'GET',
+                success: function (count) {
+                    $('#cart-count').text(count); // yeh count ko HTML mein set karega
+                },
+                error: function () {
+                    console.error("Cart count load nahi ho paya.");
+                }
+            });
+        }
+
+        // Page load pe call karo
+        $(document).ready(function () {
+            updateCartCount();
+        });
+    </script>
+    <script>
+        function changeLanguage(lang) {
+            alert("Language changed to: " + lang);
+            // You can implement actual language switch logic here (e.g. localization, API call, etc.)
+        }
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,13 @@
+﻿@model List<StudentSpot.Models.Category>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var cat in Model)
+    {
+        <a href="@Url.Action("fetchProducts_all", "customer",
+                          new { category = cat.category_name })"
+   class="dropdown-item">
+    @cat.category_name
+</a>
+    }
+}

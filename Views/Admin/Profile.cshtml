@@ -1,0 +1,111 @@
+﻿
+@{
+    var admin = Model[0]; // Single record from list
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+        }
+
+        .profile-form {
+            background: #fff;
+            padding: 30px;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .profile-form img {
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .profile-form input, .profile-form button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .profile-form input {
+            border: 1px solid #ccc;
+        }
+
+        .profile-form input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .profile-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .profile-form button:hover {
+            background: #0056b3;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form class="profile-form" method="post" enctype="multipart/form-data">
+        <h2>MY PROFILE</h2>
+
+        @if (!string.IsNullOrEmpty(admin.admin_image))
+        {
+            <img src="~/admin_image/@admin.admin_image" alt="Admin Image" />
+        }
+        else
+        {
+            <img src="https://via.placeholder.com/120" alt="Default Image" />
+        }
+
+        <input type="hidden" name="admin_id" value="@admin.admin_id" />
+        <input type="text" name="admin_name" placeholder="Enter Your Name" value="@admin.admin_name" required />
+        <input type="email" name="admin_email" placeholder="Enter Your Email" value="@admin.admin_email" required />
+        <input type="password" name="admin_password" placeholder="Enter Your Password" value="@admin.admin_password" required />
+        <input type="file" name="admin_image_file" accept="image/*" />
+
+        <button type="submit">Update Profile</button>
+        <a class="back-link" href="/Admin/Index">← Back to Dashboard</a>
+    </form>
+</body>
+</html>

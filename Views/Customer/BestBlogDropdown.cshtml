@@ -1,0 +1,31 @@
+﻿@model List<StudentSpot.Models.Bestblog>
+
+
+<div class="articles-grid">
+    <!-- instead of blog-posts -->
+    @foreach (var blog in Model)
+    {
+        <div class="post-item">
+            <!-- instead of blog-card -->
+            @if (!string.IsNullOrEmpty(blog.blog_image))
+            {
+                <div class="post-media">
+                    <!-- instead of blog-img -->
+                    <img src="@Url.Content("~/blog_image/" + blog.blog_image)" alt="@blog.blog_name" class="post-image" />  <!-- instead of blog-popup-img -->
+
+                </div>
+            }
+            <div class="post-content-wrap">
+                <!-- instead of blog-content -->
+                <h3 class="post-title">@blog.blog_name</h3>  <!-- instead of blog-title -->
+                <p class="post-description">
+                    <!-- instead of blog-excerpt -->
+                    @(blog.blog_description.Length > 150
+                                    ? blog.blog_description.Substring(0, 150) + "..."
+                                    : blog.blog_description)
+                </p>
+                <a href="@Url.Action("blogDitail", "Customer", new { id = blog.blog_id })" class="btn-link">Read More</a>  <!-- instead of read-more -->
+            </div>
+        </div>
+    }
+</div>

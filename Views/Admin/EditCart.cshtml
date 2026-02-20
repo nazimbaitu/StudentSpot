@@ -1,0 +1,103 @@
+﻿@model StudentSpot.Models.Cart
+
+<h2>Edit Cart Status</h2>
+
+<form asp-action="EditCart" method="post" class="form-container">
+    <!-- Send cart_id via hidden field -->
+    <input type="hidden" name="cart_id" value="@Model.cart_id" />
+
+    <div class="form-group">
+        <label>Cart ID</label>
+        <input class="form-control" value="@Model.cart_id" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Product ID</label>
+        <input class="form-control" value="@Model.prod_id" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Customer ID</label>
+        <input class="form-control" value="@Model.customer_id" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Status</label>
+        <select name="status_id" class="form-control">
+            <option value="1" selected="@(Model.status_id == 1)">Order</option>
+            <option value="0" selected="@(Model.status_id == 0)">Pending</option>
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn-save">Update</button>
+    <a asp-action="fetchCart" class="btn-cancel">Cancel</a>
+</form>
+
+<style>
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-container {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-save {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-save:hover {
+            background-color: #218838;
+        }
+
+    .btn-cancel {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+</style>

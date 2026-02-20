@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model IEnumerable<StudentSpot.Models.Category>
+
+    <select name="cat_id" class="custom-select" required>
+        <option value="">-- Select Category --</option>
+
+        @foreach (var cat in Model)
+        {
+            <option value="@cat.category_id"
+                    selected="@(cat.category_id == (int?)ViewBag.selectedCategoryId)">
+                @cat.category_name
+            </option>
+        }
+    </select>
+
+    <style>
+        .custom-select {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='%23999'%20d='M2%200L0%202h4L2%200z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px;
+        }
+
+            .custom-select:focus {
+                outline: none;
+                border-color: #28a745;
+                box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
+            }
+    </style>
+
+}

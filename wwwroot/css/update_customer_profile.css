@@ -1,0 +1,87 @@
+.register-background {
+    background: url('/body/images 2.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Container */
+.profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+    /* Headings */
+    .profile-container h1,
+    .profile-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+/* Form Field Wrapper */
+.profile-field {
+    margin-bottom: 20px;
+}
+
+    /* Label */
+    .profile-field label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #444;
+    }
+
+/* Custom Input */
+.custom-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+    .custom-input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+/* Custom Select */
+.custom-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+    .custom-select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+/* Submit Button */
+.custom-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .custom-button:hover {
+        background-color: #0056b3;
+    }

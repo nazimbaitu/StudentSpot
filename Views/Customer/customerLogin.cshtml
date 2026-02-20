@@ -1,0 +1,38 @@
+﻿@model StudentSpot.Models.Customer
+@{
+    ViewData["Title"] = "customerLogin";
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/customerLogin.css" />
+
+<!-- ✅ Full page wrapper to center the form -->
+<div class="register-background">
+<div class="page-wrapper">
+    <div class="login-container">
+        <h2>Customer Login</h2>
+
+        @if (ViewBag.message != null)
+        {
+            <div class="error-message">@ViewBag.message</div>
+        }
+
+        <form method="post" class="login-form">
+            <div class="form-group">
+                <label for="customerEmail">Email</label>
+                <input type="email" id="customerEmail" name="customerEmail" placeholder="Enter your email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="customerPassword">Password</label>
+                <input type="password" id="customerPassword" name="customerPassword" placeholder="Enter your password" required />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">Login</button>
+            </div>
+            <p class="signup-link">Don’t have an account? <a href="@Url.Action("customerRegister", "customer")">Register</a></p>
+        </form>
+    </div>
+</div>
+</div>

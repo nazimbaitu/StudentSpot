@@ -1,0 +1,647 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/_customer.cshtml";
+
+    var bottleProducts = ViewData["BottleProducts"] as List<Product>;
+    var laptopProducts = ViewData["LaptopProducts"] as List<Product>;
+    var technologyProducts = ViewData["TechnologyProducts"] as List<Product>;
+    var shoppingDeals = ViewData["ContinueShoppingDeals"] as List<Product>;
+    var luxuryBrands = ViewData["DiscoverLuxuryBrands"] as List<Product>;
+    var luxuryGifts = ViewData["LuxuryGifts"] as List<Product>;
+    var amazonDevices = ViewData["AmazonDevices"] as List<Product>;
+    var pcProducts = ViewData["AmazonPCs"] as List<Product>;
+    var accessoriesProducts = ViewData["AmazonAccessories"] as List<Product>;
+    var bagProducts = ViewData["AmazonBags"] as List<Product>;
+}
+
+@* //===============is ko ma nay all products ko catagory wise kia hi ======== *@
+
+<main>
+    <!-- news picker slider -->
+    <!-- News Ticker - Top Most Bar -->
+    <div class="ticker-container">
+        <div class="ticker-wrapper">
+            <div class="ticker-label">Daily Updates</div>
+            <div class="ticker-content">
+                <div class="ticker-items">
+                    <!-- Ticker Item 1 -->
+                    <div class="ticker-item">
+                        <span class="breaking-news">Breaking</span>
+                        <span class="news-time">10:23 AM</span>
+                        <span>Apple unveils M4 chip with 30% faster neural engine</span>
+                        <span class="ticker-separator">•</span>
+                        <span>AAPL <span class="stock-up">+3.2%</span></span>
+                    </div>
+
+                    <!-- Ticker Item 2 -->
+                    <div class="ticker-item">
+                        <span class="news-time">09:47 AM</span>
+                        <span>NVIDIA announces next-gen AI processors, shares surge</span>
+                        <span class="ticker-separator">•</span>
+                        <span>NVDA <span class="stock-up">+7.5%</span></span>
+                    </div>
+
+                    <!-- Ticker Item 3 -->
+                    <div class="ticker-item">
+                        <span class="news-time">09:15 AM</span>
+                        <span>TSMC reports better-than-expected Q2 earnings</span>
+                        <span class="ticker-separator">•</span>
+                        <span>TSM <span class="stock-up">+4.1%</span></span>
+                    </div>
+
+                    <!-- Ticker Item 4 -->
+                    <div class="ticker-item">
+                        <span class="news-time">08:56 AM</span>
+                        <span>Amazon announces AI-powered shopping assistant</span>
+                        <span class="ticker-separator">•</span>
+                        <span>AMZN <span class="stock-up">+1.8%</span></span>
+                    </div>
+
+                    <!-- Ticker Item 5 -->
+                    <div class="ticker-item">
+                        <span class="news-time">08:30 AM</span>
+                        <span>Tech sector leads market rally, NASDAQ up 2.3%</span>
+                    </div>
+
+                    <!-- Ticker Item 6 -->
+                    <div class="ticker-item">
+                        <span class="news-time">08:12 AM</span>
+                        <span>Microsoft announces AI integration across Office suite</span>
+                        <span class="ticker-separator">•</span>
+                        <span>MSFT <span class="stock-up">+2.9%</span></span>
+                    </div>
+
+                    <!-- Duplicate items for seamless loop -->
+                    <div class="ticker-item">
+                        <span class="breaking-news">Breaking</span>
+                        <span class="news-time">10:23 AM</span>
+                        <span>Apple unveils M4 chip with 30% faster neural engine</span>
+                        <span class="ticker-separator">•</span>
+                        <span>AAPL <span class="stock-up">+3.2%</span></span>
+                    </div>
+
+                    <div class="ticker-item">
+                        <span class="news-time">09:47 AM</span>
+                        <span>NVIDIA announces next-gen AI processors, shares surge</span>
+                        <span class="ticker-separator">•</span>
+                        <span>NVDA <span class="stock-up">+7.5%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Amazon Style Background Slider -->
+    <div class="amazon-bg-slider">
+        <!-- Slide 1 -->
+        <div class="bg-slide active" style="background:linear-gradient(120deg, #f6d365, #fda085)">
+  
+            <div class="bg-overlay"></div>
+            <div class="bg-content">
+                <h2 class="bg-title">Welcome to ZelloHub</h2>
+                <p class="bg-subtitle">Your one-stop platform for student essentials & support</p>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="bg-button">Shop Now</a>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="bg-slide" style="background:linear-gradient(120deg, #fbc2eb, #a6c1ee)">
+            <div class="bg-overlay"></div>
+            <div class="bg-content">
+                <h2 class="bg-title">Presidents' Day Sale</h2>
+                <p class="bg-subtitle">Up to 40% off on beauty products</p>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="bg-button">Shop Deals</a>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="bg-slide" style="background-image: url('~/wwwroot/hero logo/baner11.jpg')">
+            <div class="bg-overlay"></div>
+            <div class="bg-content">
+                <h2 class="bg-title">Luxury Brands</h2>
+                <p class="bg-subtitle">15% off select designer brands</p>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="bg-button">Explore</a>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="bg-slide" style="background-image: url('~/wwwroot/hero logo/baner11.jpg')">
+            <div class="bg-overlay"></div>
+            <div class="bg-content">
+                <h2 class="bg-title">Amazon Devices</h2>
+                <p class="bg-subtitle">Save up to 33% on Echo, Fire TV, Kindle & more</p>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="bg-button">Shop Now</a>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="bg-arrow prev" onclick="changeSlide(-1)">❮</button>
+        <button class="bg-arrow next" onclick="changeSlide(1)">❯</button>
+
+        <!-- Dots Indicator -->
+        <div class="bg-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+    </div>
+
+    <!-- Cards Container - Slider ke uppar -->
+    <div class="cards-over-slider">
+        <div class="nx-home-wrapper">
+            <!-- CARD 1: Continue shopping deals -->
+            <div class="nx-home-card">
+                <h2 class="nx-card-title">Continue shopping deals</h2>
+                <div class="nx-image-grid">
+                    @foreach (var pro in shoppingDeals.Take(4))
+                    {
+                        <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })'>
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                        </a>
+                    }
+                </div>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">See more deals</a>
+            </div>
+
+            <!-- CARD 2: Discover luxury brands -->
+            <div class="nx-home-card">
+                <h2 class="nx-card-title">Discover luxury brands</h2>
+                <div class="nx-product-grid">
+                    @foreach (var pro in luxuryBrands.Take(4))
+                    {
+                        <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                            <div class="nx-product-box">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                                <p class="nx-product-name">@pro.product_name</p>
+                            </div>
+                        </a>
+                    }
+                </div>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">Shop Now</a>
+            </div>
+
+            <!-- CARD 3: Up to 15% off luxury gifts -->
+            <div class="nx-home-card">
+                <h2 class="nx-card-title">Up to 15% off luxury gifts</h2>
+                <div class="nx-product-grid">
+                    @foreach (var pro in luxuryGifts.Take(4))
+                    {
+                        <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                            <div class="nx-product-box">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                                <p class="nx-product-name">@pro.product_name</p>
+                            </div>
+                        </a>
+                    }
+                </div>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">Shop pre-loved jewelry & handbags</a>
+            </div>
+
+            <!-- CARD 4: Save on Amazon Devices -->
+            <div class="nx-home-card">
+                <h2 class="nx-card-title">Save on Amazon Devices</h2>
+                <div class="nx-product-grid">
+                    @foreach (var pro in amazonDevices.Take(4))
+                    {
+                        <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                            <div class="nx-discount-box">
+                                <span class="nx-discount-badge">33% off</span>
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </div>
+                        </a>
+                    }
+                </div>
+                <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">See more</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Background Slider JavaScript
+        let slideIndex = 1;
+        let slides = document.getElementsByClassName("bg-slide");
+        let dots = document.getElementsByClassName("dot");
+
+        // Initialize
+        showSlides(slideIndex);
+
+        // Change slide function
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Current slide function
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Main slides function
+        function showSlides(n) {
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+
+            // Remove active class from all dots
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            // Show current slide and activate dot
+            slides[slideIndex - 1].classList.add("active");
+            dots[slideIndex - 1].classList.add("active");
+        }
+
+        // Auto slide change every 5 seconds
+        let autoSlide = setInterval(function() {
+            changeSlide(1);
+        }, 5000);
+
+        // Pause auto slide on hover
+        document.querySelector('.amazon-bg-slider').addEventListener('mouseenter', function() {
+            clearInterval(autoSlide);
+        });
+
+        document.querySelector('.amazon-bg-slider').addEventListener('mouseleave', function() {
+            autoSlide = setInterval(function() {
+                changeSlide(1);
+            }, 5000);
+        });
+    </script>
+
+  
+    @* /==============================================================================================/
+
+    <div class="nx-home-wrapper">
+        <!-- CARD 1: Continue shopping deals -->
+        <div class="nx-home-card">
+            <h2 class="nx-card-title">Continue shopping deals</h2>
+            <div class="nx-image-grid">
+                @foreach (var pro in shoppingDeals.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })'>
+                        <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">See more deals</a>
+        </div>
+
+        <!-- CARD 2: Discover luxury brands -->
+        <div class="nx-home-card">
+            <h2 class="nx-card-title">Discover luxury brands</h2>
+            <div class="nx-product-grid">
+                @foreach (var pro in luxuryBrands.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                        <div class="nx-product-box">
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            <p class="nx-product-name">@pro.product_name</p>
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">Shop Now</a>
+        </div>
+
+        <!-- CARD 3: Up to 15% off luxury gifts -->
+        <div class="nx-home-card">
+            <h2 class="nx-card-title">Up to 15% off luxury gifts</h2>
+            <div class="nx-product-grid">
+                @foreach (var pro in luxuryGifts.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                        <div class="nx-product-box">
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            <p class="nx-product-name">@pro.product_name</p>
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">Shop pre-loved jewelry & handbags</a>
+        </div>
+
+        <!-- CARD 4: Save on Amazon Devices -->
+        <div class="nx-home-card">
+            <h2 class="nx-card-title">Save on Amazon Devices</h2>
+            <div class="nx-product-grid">
+                @foreach (var pro in amazonDevices.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nazimbaitu">
+                        <div class="nx-discount-box">
+                            <span class="nx-discount-badge">33% off</span>
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nx-card-link">See more</a>
+        </div>
+    </div> *@
+
+    @* /===================================================================================================/ *@
+
+    <div class="catagorieWisecontainer">
+        @* == =============1 ====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="BestSellers" class="section-title-ali">Best Sellers in Home</h2>
+                <a class="see-more-ss" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in bottleProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        @* == =============2====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="wirelessProducts" class="section-title-ali">Popular products in Wireless internationally</h2>
+                <a class="see-more" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in laptopProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        @* == =============3====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="pc" class="section-title-ali">Popular products in Apparel internationally</h2>
+                <a class="see-more" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in pcProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        @* == =============4====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="Gear" class="section-title-ali">Gear up to get fit</h2>
+                <a class="see-more" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in accessoriesProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        <script>
+            document.querySelectorAll(".carousel-container").forEach(container => {
+                const track = container.querySelector(".carousel-track");
+                const nextBtn = container.querySelector(".right");
+                const prevBtn = container.querySelector(".left");
+                const item = container.querySelector(".item");
+
+                if (!item) return;
+
+                const itemWidth = item.offsetWidth + 15; // width + gap
+                let position = 0;
+
+                nextBtn.addEventListener("click", () => {
+                    const maxScroll = track.scrollWidth - container.querySelector(".carousel-window").offsetWidth;
+                    position += itemWidth * 5;
+                    if (position > maxScroll) position = maxScroll;
+                    track.style.transform = `translateX(-${position}px)`;
+                });
+
+                prevBtn.addEventListener("click", () => {
+                    position -= itemWidth * 5;
+                    if (position < 0) position = 0;
+                    track.style.transform = `translateX(-${position}px)`;
+                });
+            });
+        </script>
+    </div>
+
+    @* /////////// is ko ma nay use kia hi kay is ko jatnay marzee container add kr lo jo tap pr hi is kay taraha kay ////////// *@
+
+    <div class="nxCoreAmazonHome-wrapper">
+        <!-- CARD 1 -->
+        <div class="nxCoreAmazonHome-card">
+            <h2 class="nxCoreAmazonHome-card-title">Continue shopping deals</h2>
+            <div class="nxCoreAmazonHome-image-grid">
+                @foreach (var pro in shoppingDeals.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })'>
+                        <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nxCoreAmazonHome-card-link">See more deals</a>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="nxCoreAmazonHome-card">
+            <h2 class="nxCoreAmazonHome-card-title">Discover luxury brands</h2>
+            <div class="nxCoreAmazonHome-product-grid">
+                @foreach (var pro in luxuryBrands.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nxCoreAmazonHome-no-underline">
+                        <div class="nxCoreAmazonHome-product-box">
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            <p class="nxCoreAmazonHome-product-name">@pro.product_name</p>
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nxCoreAmazonHome-card-link">Shop Now</a>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="nxCoreAmazonHome-card">
+            <h2 class="nxCoreAmazonHome-card-title">Up to 15% off luxury gifts</h2>
+            <div class="nxCoreAmazonHome-product-grid">
+                @foreach (var pro in luxuryGifts.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nxCoreAmazonHome-no-underline">
+                        <div class="nxCoreAmazonHome-product-box">
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            <p class="nxCoreAmazonHome-product-name">@pro.product_name</p>
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nxCoreAmazonHome-card-link">Shop pre-loved jewelry & handbags</a>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="nxCoreAmazonHome-card">
+            <h2 class="nxCoreAmazonHome-card-title">Save on Amazon Devices</h2>
+            <div class="nxCoreAmazonHome-product-grid">
+                @foreach (var pro in amazonDevices.Take(4))
+                {
+                    <a href='@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })' class="nxCoreAmazonHome-no-underline">
+                        <div class="nxCoreAmazonHome-discount-box">
+                            <span class="nxCoreAmazonHome-discount-badge">33% off</span>
+                            <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                        </div>
+                    </a>
+                }
+            </div>
+            <a href="@Url.Action("fetchProducts_all", "customer")" class="nxCoreAmazonHome-card-link">See more</a>
+        </div>
+    </div>
+
+    @* /=========================is ko dobara phir putt kia hi ==================================/ *@
+
+    <div class="catagorieWisecontainer">
+        @* == =============2====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="wirelessProducts" class="section-title-ali">Popular products in Wireless internationally</h2>
+                <a class="see-more" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in laptopProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        @* == =============3====================================*@
+        <div class="carousel-container">
+            <div class="carousel-header">
+                <h2 id="pc" class="section-title-ali">Popular products in Apparel internationally</h2>
+                <a class="see-more" href="@Url.Action("fetchProducts_all", "customer")">See more</a>
+            </div>
+            <button class="arrow left">&#10094;</button>
+            <div class="carousel-window">
+                <div class="carousel-track">
+                    @foreach (var pro in pcProducts)
+                    {
+                        <div class="item">
+                            <a href="@Url.Action("pruductsDitail", "customer", new { id = pro.product_id })">
+                                <img src="~/products_image/@pro.product_image" alt="@pro.product_name" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="arrow right">&#10095;</button>
+        </div>
+
+        <script>
+            document.querySelectorAll(".carousel-container").forEach(container => {
+                const track = container.querySelector(".carousel-track");
+                const nextBtn = container.querySelector(".right");
+                const prevBtn = container.querySelector(".left");
+                const item = container.querySelector(".item");
+
+                if (!item) return;
+
+                const itemWidth = item.offsetWidth + 15; // width + gap
+                let position = 0;
+
+                nextBtn.addEventListener("click", () => {
+                    const maxScroll = track.scrollWidth - container.querySelector(".carousel-window").offsetWidth;
+                    position += itemWidth * 5;
+                    if (position > maxScroll) position = maxScroll;
+                    track.style.transform = `translateX(-${position}px)`;
+                });
+
+                prevBtn.addEventListener("click", () => {
+                    position -= itemWidth * 5;
+                    if (position < 0) position = 0;
+                    track.style.transform = `translateX(-${position}px)`;
+                });
+            });
+        </script>
+    </div>
+
+    <div class="product-section-main">
+        <!-- Featured Products Section -->
+        <h2 class="section-heading-main">Featured Products</h2>
+        <div class="product-grid-main">
+            @await Html.PartialAsync("fetchProductsDropdown", (List<Product>)ViewData["product"])
+        </div>
+    </div>
+
+    @* /*=================================================================== --> *@
+    
+    @* @{
+        ViewData["Title"] = "Latest Blog Posts";
+        var blogs = ViewData["bestblogs"] as List<StudentSpot.Models.Bestblog>;
+    }
+    <div class="container">
+        <h2 class="section-title">Latest Blog Posts</h2>
+        @if (blogs != null && blogs.Any())
+        {
+            @await Html.PartialAsync("BestBlogDropdown", blogs)
+        }
+        else
+        {
+            <p>No blog posts available.</p>
+        }
+    <div> *@
+
+  @*   <div class="container">
+        <h2 id="technology" class="categories-title">Technology Product Categories</h2>
+        <div class="categories-container">
+            @foreach (var pro in technologyProducts)
+            {
+                <div class="category-card">
+                    <img src="~/products_image/@pro.product_image" alt="@pro.product_name" class="category-img">
+                    <p class="category-name">@pro.product_name</p>
+                </div>
+            }
+        </div>
+    </div> *@
+</main>

@@ -1,0 +1,97 @@
+﻿@model List<StudentSpot.Models.Product>
+
+@{
+    ViewData["Title"] = "My Wishlist";
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<h2 class="text-center my-4">❤️ My Wishlist</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="new-arrivals all-products-view">
+        @foreach (var pro in Model)
+        {
+            <div class="arrival-item">
+                <div class="arrival-img">
+                    <img src="@Url.Content("~/products_image/" + pro.product_image)"
+                         alt="@pro.product_name"
+                         style="width:100%; height:100%;" asp-append-version="true" />
+                </div>
+
+                <div class="arrival-info">
+                    <h4 class="arrival-title">@pro.product_name</h4>
+
+                    <!-- Price + Wishlist -->
+                    <div class="price-wishlist">
+                        <span class="arrival-price">RS @pro.product_price</span>
+
+                        <!-- Remove from Wishlist -->
+                        <form method="post" asp-action="AddToWishlist" asp-controller="Customer" class="wishlist-form">
+                            <input type="hidden" name="prod_id" value="@pro.product_id" />
+                            <button type="submit" class="wishlist-icon">
+                                <i class="fas fa-heart" style="color:red;"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Add To Cart -->
+                    <form method="post" asp-action="AddToCart" asp-controller="Customer">
+                        <input type="hidden" name="prod_id" value="@pro.product_id" />
+                        <button type="submit" class="add-to-cart-btn">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="text-center mt-5">
+        <h4>No items in your wishlist.</h4>
+        <a href="@Url.Action("fetchProducts_all", "Customer")" class="btn btn-primary mt-3">
+            Continue Shopping
+        </a>
+    </div>
+}
+<style>
+    .price-wishlist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 8px 0;
+    }
+
+    .wishlist-form {
+        display: inline-block;
+    }
+
+    .wishlist-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        transition: transform 0.2s ease;
+    }
+
+        .wishlist-icon:hover {
+            transform: scale(1.2);
+            color: red;
+        }
+
+    .add-to-cart-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+    }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+</style>

@@ -1,0 +1,162 @@
+﻿@model StudentSpot.Models.Cart
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<h2>Checkout Product</h2>
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        font-weight: 700;
+        color: #2c3e50;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .checkout-container {
+        max-width: 600px;
+        margin: 0 auto 60px auto;
+        padding: 30px 40px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+        .checkout-container h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        .checkout-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .checkout-container p {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #555555;
+        }
+
+            .checkout-container p strong {
+                color: #2c3e50;
+                font-weight: 600;
+            }
+
+        .checkout-container form {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .checkout-container button,
+        .checkout-container a.btn {
+            flex: 1;
+            padding: 12px 0;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .checkout-container button {
+            background-color: #28a745;
+            border: none;
+            color: white;
+        }
+
+            .checkout-container button:hover {
+                background-color: #218838;
+            }
+
+        .checkout-container a.btn {
+            background-color: #6c757d;
+            color: white;
+            line-height: 1.5;
+        }
+
+            .checkout-container a.btn:hover {
+                background-color: #5a6268;
+            }
+
+    .alert-success {
+        max-width: 600px;
+        margin: 20px auto 0 auto;
+        padding: 15px 20px;
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: 6px;
+        border: 1px solid #c3e6cb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 16px;
+    }
+
+    media (max-width: 480px) {
+        .checkout-container
+
+    {
+        padding: 20px 25px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .checkout-container h3 {
+        font-size: 22px;
+    }
+
+    .checkout-container p {
+        font-size: 16px;
+    }
+
+    .checkout-container form {
+        flex-direction: column;
+    }
+
+    .checkout-container button,
+    .checkout-container a.btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    }
+</style>
+
+<div class="checkout-container">
+    <h3>@Model.Products.product_name</h3>
+
+    <img src="@Url.Content("~/products_image/" + Model.Products.product_image)" alt="@Model.Products.product_name" />
+
+
+    <p><strong>Price per unit:</strong> @Model.Products.product_price</p>
+    <p><strong>Quantity:</strong> @Model.product_quantity</p>
+
+    <p><strong>Total Amount:</strong> @ViewBag.TotalAmount.ToString("C")</p>
+
+    <p><strong>Description:</strong> @Model.Products.product_description</p>
+
+    <form asp-action="CheckoutConfirm" method="post">
+        <input type="hidden" name="id" value="@Model.cart_id" />
+        <button type="submit">Confirm Checkout</button>
+        <a href="@Url.Action("fetchCart", "customer")" class="btn">Cancel</a>
+    </form>
+</div>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" style="margin-top:20px;">
+        @TempData["Message"]
+    </div>
+}

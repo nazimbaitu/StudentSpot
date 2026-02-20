@@ -1,0 +1,86 @@
+﻿@model IEnumerable<StudentSpot.Models.Cart>
+@{
+    ViewData["Title"] = "fetchCart";
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/fetchCartsCustomer.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<div class="cart-page">
+    <h2>My Shopping Cart</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <form asp-action="PlaceOrder" method="post">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Cart ID</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-label="Cart ID">
+                                <span class="cart-id-badge">#@item.cart_id</span>
+                            </td>
+                            <td data-label="Product">
+                                <span class="product-name">@item.Products?.product_name</span>
+                            </td>
+                            <td data-label="Price">
+                                <span class="price">@item.Products?.product_price</span>
+                            </td>
+                            <td data-label="Quantity">
+                                <span class="quantity">@item.product_quantity</span>
+                            </td>
+                            <td data-label="Actions">
+                                <div class="action-buttons">
+                                    <a href="@Url.Action("RemoveFromCart", "customer", new { id = item.cart_id })"
+                                       class="remove-link"
+                                       onclick="return confirm('Are you sure you want to remove this item?');">
+                                        <i class="fas fa-trash-alt"></i> Remove
+                                    </a>
+                                    <a href="@Url.Action("Checkout", "customer", new { id = item.cart_id })"
+                                       class="remove-links">
+                                        <i class="fas fa-bolt"></i> Checkout
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div style="text-align:center;">
+                <button type="submit" class="btn-success">
+                    <i class="fas fa-check-circle"></i> Place Full Order
+                </button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any items to your cart yet.</p>
+            <a href="@Url.Action("Index", "Home")" class="btn-shop">
+                <i class="fas fa-store"></i> Continue Shopping
+            </a>
+        </div>
+    }
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert-success">
+            <i class="fas fa-check-circle"></i>
+            @TempData["Message"]
+        </div>
+    }
+</div>

@@ -1,0 +1,78 @@
+﻿@model StudentSpot.Models.Category
+
+<h2>Update Category</h2>
+
+<div class="form-box">
+    <form method="post">
+        <input type="hidden" name="category_id" value="@Model.category_id" />
+        <input type="text" name="category_name" value="@Model.category_name" placeholder="Enter Name" />
+
+        <button type="submit" value="Update  Category" class="btn-link btn-update">update</button>
+    </form>
+
+
+    <!-- Cancel Anchor -->
+    <a href="@Url.Action("fetchCategory", "Admin")" class="btn-link btn-cancel">Cancel</a>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-box {
+        max-width: 400px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input, select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .btn-link {
+        display: inline-block;
+        text-align: center;
+        padding: 10px 15px;
+        margin-top: 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-update {
+        background: #28a745;
+        color: white;
+    }
+
+        .btn-update:hover {
+            background: #218838;
+        }
+
+    .btn-cancel {
+        background: #dc3545;
+        color: white;
+    }
+
+        .btn-cancel:hover {
+            background: #c82333;
+        }
+</style>

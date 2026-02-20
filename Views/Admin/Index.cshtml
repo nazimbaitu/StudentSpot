@@ -1,0 +1,125 @@
+﻿ @* @model IEnumerable<StudentSpot.Models.BayNow> *@
+<div class="overlay" id="overlay"></div>
+<!-- Main Content -->
+
+<div class="main-content" id="mainContent">
+    <div class="dashboard-header">
+        <h1>StudentSpot Dashboard</h1>
+        <p>Welcome to your e-commerce management dashboard</p>
+    </div>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Total Sales</h3>
+                <div class="card-icon" style="background: #6a11cb;">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+            </div>
+            <div class="card-value">
+                $@(ViewBag.TotalSales != null ? ((decimal)ViewBag.TotalSales).ToString("N2") : "0.00")
+            </div>
+            <p class="card-text">Based on recent 4 orders</p>
+        </div>
+
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Customers</h3>
+                <div class="card-icon" style="background: #5856d6;">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+            <div class="card-value">
+                @(ViewBag.totalCustomer != null ? ((int)ViewBag.totalCustomer).ToString("N0") : "0")
+            </div>
+            <p class="card-text">+14 new this month</p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Orders</h3>
+                <div class="card-icon" style="background: #4cd964;">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+            <div class="card-value">@ViewBag.TotalOrders.ToString("N0")</div>
+            <p class="card-text">+5% from last month</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Products</h3>
+                <div class="card-icon" style="background: #ff9500;">
+                    <i class="fas fa-box"></i>
+                </div>
+            </div>
+            <div class="card-value">@ViewBag.TotalProducts.ToString("N0")</div>
+            <p class="card-text">+32 new this month</p>
+        </div>
+
+    </div>
+
+    <div class="recent-orders"> 
+        <div class="orders-header">
+            <h2 class="orders-title">Recent Orders</h2>
+            <a href="@Url.Action("FetchBayOrders", "Admin")"class="btn btn-sm btn-primary ms-2">View All</a>
+        </div>
+        @model IEnumerable<StudentSpot.Models.BayNow>
+
+        <h2>All Orders</h2>
+
+        <table class="table table-bordered table-striped custom-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Cart ID</th>
+                    <th>Customer Name</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Status / Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    var cart = order.Cart;
+                    var product = cart?.Products;
+                    var customer = cart?.customers;
+
+                    <tr>
+                        <td>@order.order_i</td>
+                        <td>@cart?.cart_id</td>
+                        <td>@customer?.customer_name</td>
+                        <td>@product?.product_name</td>
+                        <td>@cart?.product_quantity</td>
+                        <td>@String.Format("{0:C}", product?.product_price)</td>
+                        <td>
+                            @if (order.Bay_status_id == 0)
+                            {
+                                <span class="badge bg-warning">Pending</span>
+                                <form asp-action="ApproveOrder" asp-controller="Admin" method="post" class="inline-form" onsubmit="return confirm('Approve this order?');">
+                                    <input type="hidden" name="id" value="@order.order_i" />
+                                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                                </form>
+                            }
+                            else if (order.Bay_status_id == 1)
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Unknown</span>
+                            }
+
+                            <a href="@Url.Action("OrderDetails", "Admin", new { id = order.order_i })" class="btn btn-sm btn-primary ms-2">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

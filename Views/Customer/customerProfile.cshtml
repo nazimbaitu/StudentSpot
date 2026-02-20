@@ -1,0 +1,33 @@
+﻿@model StudentSpot.Models.Customer
+@{
+    ViewData["Title"] = "customerProfile";
+    Layout = "~/Views/_customer.cshtml";
+}
+<link rel="stylesheet" href="~/css/profileCustomer.css" />
+<div class="register-background">
+<div class="profile-container">
+    <h2>Your Profile</h2>
+
+    <!-- ✅ Profile Picture -->
+    @if (!string.IsNullOrEmpty(Model.customer_image))
+    {
+        <div class="profile-image">
+            <img src="@Model.customer_image" alt="Customer Image" style="width:150px; height:auto; border-radius: 8px;" />
+        </div>
+    }
+    else
+    {
+        <div class="profile-image">
+            <p>No profile image uploaded.</p>
+        </div>
+    }
+
+    <div class="profile-field"><strong>Full Name:</strong> @Model.customer_name</div>
+    <div class="profile-field"><strong>Email:</strong> @Model.customer_email</div>
+    <div class="profile-field"><strong>Phone:</strong> @Model.customer_phone</div>
+    <div class="profile-field"><strong>Address:</strong> @Model.customer_adress</div>
+    <div class="profile-field"><strong>Gender:</strong> @Model.customer_gender</div>
+
+    <a asp-action="update_customer_profile" class="edit-profile-button">Edit Profile</a>
+</div>
+</div>

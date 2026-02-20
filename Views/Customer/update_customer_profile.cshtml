@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "update_customer_profile";
+    Layout = "~/Views/_customer.cshtml";
+}
+@model StudentSpot.Models.Customer
+
+
+<link rel="stylesheet" href="~/css/update_customer_profile.css" />
+<div class="register-background">
+<form asp-action="update_customer_profile" method="post" enctype="multipart/form-data">
+    <div class="profile-container">
+        <div class="profile-field">
+            <label>Full Name</label>
+            <input asp-for="customer_name" class="custom-input" />
+        </div>
+        <div class="profile-field">
+            <label>Email</label>
+            <input asp-for="customer_email" class="custom-input" />
+        </div>
+        <div class="profile-field">
+            <label>Phone</label>
+            <input asp-for="customer_phone" class="custom-input" />
+        </div>
+        <div class="profile-field">
+            <label>Address</label>
+            <input asp-for="customer_adress" class="custom-input" />
+        </div>
+        <div class="profile-field">
+            <label>Gender</label>
+            <select asp-for="customer_gender" class="custom-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        <div class="profile-field">
+            <label>Profile Image</label>
+            <input type="file" name="customerImage" class="custom-input" />
+        </div>
+
+        @* Show existing image if available *@
+        @if (!string.IsNullOrEmpty(Model.customer_image))
+        {
+            <div class="profile-field">
+                <label>Current Image</label>
+                <img src="@Model.customer_image" alt="Profile Image" width="120" height="120" />
+            </div>
+        }
+
+        <button type="submit" class="custom-button">Update Profile</button>
+    </div>
+</form>
+</div>

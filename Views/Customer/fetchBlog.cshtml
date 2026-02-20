@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Latest Blog Posts";
+    var blogs = ViewData["bestblogs"] as List<StudentSpot.Models.Bestblog>;
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/fetchBlog.css" /> 
+
+<main class="main-wrapper">  <!-- instead of container -->
+   
+
+    <section class="posts-section">  <!-- instead of blog-section -->
+        
+
+        @if (blogs != null && blogs.Any())
+        {
+            <div class="posts-grid">  <!-- instead of blog-grid -->
+                @await Html.PartialAsync("BestBlogDropdown", blogs)
+            </div>
+        }
+        else
+        {
+            <p class="no-posts-message">No blog posts available.</p>  <!-- instead of no-blogs -->
+        }
+    </section>
+</main>
+
+<script src="~/js/fetchblog.js"></script>

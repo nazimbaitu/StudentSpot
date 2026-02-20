@@ -1,0 +1,105 @@
+﻿@model StudentSpot.Models.Customer
+
+@{
+    ViewData["Title"] = "Update Customer";
+}
+
+@* <h2>Update Customer</h2> *@
+
+<style>
+    .form-box {
+        width: 60%;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+        .form-box input[type="text"],
+        .form-box input[type="email"],
+        .form-box input[type="password"],
+        .form-box input[type="file"],
+        .form-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+    .btn-link {
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        transition: 0.3s;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+    .save {
+        background-color: #27ae60;
+        color: white;
+    }
+
+        .save:hover {
+            background-color: #1e8449;
+        }
+
+    .cancel {
+        background-color: #7f8c8d;
+        color: white;
+    }
+
+        .cancel:hover {
+            background-color: #626e70;
+        }
+
+    .image-preview {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+        .image-preview img {
+            border-radius: 50%;
+            border: 2px solid #34495e;
+            width: 100px;
+            height: 100px;
+        }
+</style>
+
+<div class="form-box">
+    <h2>Update Customer</h2>
+    <form asp-action="UpdateCustomer" asp-controller="Admin" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="customer_id" value="@Model.customer_id" />
+
+        <input type="text" name="customer_name" value="@Model.customer_name" placeholder="Customer Name" required />
+
+        <input type="email" name="customer_email" value="@Model.customer_email" placeholder="Email" required />
+
+        <input type="password" name="customer_password" value="@Model.customer_password" placeholder="Password" required />
+
+        <input type="text" name="customer_phone" value="@Model.customer_phone" placeholder="Phone" required />
+        <input type="text" name="customer_country" value="@Model.customer_country" placeholder="country" required />
+
+        <textarea name="customer_adress" placeholder="Address" rows="3">@Model.customer_adress</textarea>
+
+        <input type="text" name="customer_gender" value="@Model.customer_gender" placeholder="Gender (Male, Female, Other)" required />
+
+        <!-- Show existing image -->
+        <div class="image-preview">
+            <img src="~/customer_image/@Model.customer_image" asp-append-version="true" alt="Customer Image" />
+        </div>
+
+        <!-- Upload new image -->
+        <input type="file" name="ImageFile" accept="image/*" />
+
+        <button type="submit" class="btn-link save">Update</button>
+        <a href="@Url.Action("fetchCustomer", "Admin")" class="btn-link cancel">Cancel</a>
+    </form>
+</div>

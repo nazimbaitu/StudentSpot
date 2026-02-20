@@ -1,0 +1,82 @@
+/* Table Styling */
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #2c3e50;
+}
+
+.table-container {
+    width: 95%;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+    .custom-table th {
+        background-color: #34495e;
+        color: #fff;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .custom-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        color: #2c3e50;
+    }
+
+    .custom-table tr:hover {
+        background-color: #f4f6f7;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+/* Anchor Button Styling */
+.btn-link {
+    padding: 6px 12px;
+    margin: 2px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+/* Different Colors */
+.details {
+    background-color: #3498db;
+    color: white;
+}
+
+    .details:hover {
+        background-color: #217dbb;
+    }
+
+.update {
+    background-color: #f39c12;
+    color: white;
+}
+
+    .update:hover {
+        background-color: #d68910;
+    }
+
+.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+    .delete:hover {
+        background-color: #c0392b;
+    }

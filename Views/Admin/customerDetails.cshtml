@@ -1,0 +1,104 @@
+﻿@model StudentSpot.Models.Customer
+
+@{
+    ViewData["Title"] = "Update Customer";
+}
+
+<h2>Customer Details</h2>
+<style>
+    .details-box {
+        width: 60%;
+        margin: 20px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .image-box {
+        margin-bottom: 20px;
+    }
+
+    .details-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+        .details-list li {
+            font-size: 16px;
+            margin: 8px 0;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+    /* Anchor Button Styling */
+    .btn-link {
+        padding: 6px 12px;
+        margin: 2px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        transition: 0.3s;
+    }
+
+    /* Different Colors */
+    .details {
+        background-color: #3498db;
+        color: white;
+    }
+
+        .details:hover {
+            background-color: #217dbb;
+        }
+
+    .update {
+        background-color: #f39c12;
+        color: white;
+    }
+
+        .update:hover {
+            background-color: #d68910;
+        }
+
+    .delete {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+</style>
+
+<div class="details-box">
+    <h2>Customer Details</h2>
+    <!-- Image Top -->
+    <div class="image-box">
+        <img src="@Url.Content("~/customer_image/" + Model.customer_image)"
+             asp-append-version="true"
+             alt="Customer Image"
+             width="150" height="150"
+             style="border-radius:50%; border:2px solid #34495e;" />
+
+    </div>
+
+    <!-- Details in List -->
+    <ul class="details-list">
+        <li><strong>ID:</strong> @Model.customer_id</li>
+        <li><strong>Name:</strong> @Model.customer_name</li>
+        <li><strong>Email:</strong> @Model.customer_email</li>
+        <li><strong>Password:</strong> @Model.customer_password</li>
+        <li><strong>Phone:</strong> @Model.customer_phone</li>
+        <li><strong>Address:</strong> @Model.customer_adress</li>
+        <li><strong>Gender:</strong> @Model.customer_gender</li>
+        <li><strong>Image:</strong> @Model.customer_image</li>
+    </ul>
+    <a href="@Url.Action("fetchCustomer", "Admin")" class="btn-link details">Back to List</a>
+</div>
+
+@* <a href="@Url.Action("fetchCustomer", "Admin")" class="btn-link details">Back to List</a> *@

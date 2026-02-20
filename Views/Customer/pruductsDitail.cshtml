@@ -1,0 +1,257 @@
+﻿@model IEnumerable<StudentSpot.Models.Product>
+
+@{
+    ViewData["Title"] = "Product Details";
+    Layout = "~/Views/_customer.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/pruductsDitailCustmoer.css" />
+
+<div class="pruductsDitailOne">
+    @foreach (var pro in Model)
+    {
+        <!-- Product Title -->
+        <h2 class="product-title">@pro.product_name</h2>
+
+        <!-- Main Product Container -->
+        <div class="product-container">
+            <!-- Left Side: Image with Zoom -->
+            <div class="product-image" id="mainProductImage">
+                <img src="@Url.Content("~/products_image/" + pro.product_image)"
+                     alt="@pro.product_name"
+                     id="mainProductImg" />
+
+                <!-- Thumbnail Gallery (for multiple images) -->
+                <div class="thumbnail-gallery">
+                    <!-- Main Thumbnail -->
+                    <div class="thumbnail-item active">
+                        <img src="@Url.Content("~/products_image/" + pro.product_image)"
+                             alt="Thumbnail" />
+                    </div>
+
+                    <!-- Optional: Add more thumbnails if you have multiple images -->
+                    @* <div class="thumbnail-item">
+                        <img src="@Url.Content("~/products_image/image2.jpg")" alt="Thumbnail 2" />
+                    </div>
+                    <div class="thumbnail-item">
+                        <img src="@Url.Content("~/products_image/image3.jpg")" alt="Thumbnail 3" />
+                    </div> *@
+                </div>
+            </div>
+
+            <!-- Zoom Result Box (will be created by JavaScript) -->
+            <!-- This div will be created dynamically by JS, but you can keep it here -->
+            <div class="zoom-result-box" style="display: none;">
+                <img src="@Url.Content("~/products_image/" + pro.product_image)" alt="Zoomed Image" />
+            </div>
+
+            <!-- Right Side: Price & Buttons -->
+            <div class="product-side-box">
+                <!-- Stock Status -->
+                <p class="stock text-success">
+                    <i class="fas fa-check-circle"></i> In Stock
+                </p>
+
+                <!-- Price -->
+                <p class="price">@pro.product_price</p>
+
+                <!-- Delivery Info (Optional) -->
+                <div class="delivery-info">
+                    <i class="fas fa-truck"></i>
+                    <span>Free Delivery on orders above Rs. 999</span>
+                </div>
+
+                <!-- Offer Section (Optional) -->
+                <div class="offer-section">
+                    <div class="offer-title">Available Offers</div>
+                    <div class="offer-item">
+                        <i class="fas fa-tag"></i>
+                        <span>Bank Offer: 10% off on HDFC Cards</span>
+                    </div>
+                    <div class="offer-item">
+                        <i class="fas fa-gift"></i>
+                        <span>Combo Offer: Buy 2 get 5% off</span>
+                    </div>
+                </div>
+
+                <!-- Rating Section (Optional) -->
+                <div class="rating-section">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="rating-count">4.5 (120 ratings)</span>
+                </div>
+
+                <!-- EMI Options (Optional) -->
+                <div class="emi-options">
+                    <i class="fas fa-credit-card"></i>
+                    <span>
+                        EMI starting from Rs. 500/month |
+                        <a href="#">View Plans</a>
+                    </span>
+                </div>
+
+
+                @* <form method="post" asp-action="AddToCart" asp-controller="Customer" class="back-btn">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="prod_id" value="@pro.product_id" />
+                    <button type="submit" class="fas fa-shopping-cart">Add To Cart</button>
+                </form>
+ *@
+
+
+
+
+               <!-- Button Group -->
+                <div class="button-group">
+                    <!-- Add to Cart -->
+                    <form method="post" asp-action="AddToCart" asp-controller="Customer" class="back-btn">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="prod_id" value="@pro.product_id" />
+
+                        <button type="submit" style="background:none;border:none;padding:0;">
+                            <i class="fas fa-shopping-cart"></i> Add To Cart
+                        </button>
+                    </form>
+
+                 </div>
+            </div>
+        </div>
+
+        <!-- Product Description Section -->
+        <div class="product-details">
+            <h3>Product Description</h3>
+            <p>@pro.product_description</p>
+
+            <!-- Feature Bullets (Optional) -->
+            <ul class="feature-bullets">
+                <li>High quality product</li>
+                <li>100% genuine guarantee</li>
+                <li>Easy returns within 7 days</li>
+                <li>Manufacturer warranty included</li>
+            </ul>
+
+            <!-- Technical Details (Optional) -->
+            <div class="tech-details">
+                <div class="tech-item">
+                    <span class="tech-label">Brand</span>
+                    <span class="tech-value">Generic</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-label">Model</span>
+                    <span class="tech-value">2024 Edition</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-label">Warranty</span>
+                    <span class="tech-value">1 Year</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-label">Country of Origin</span>
+                    <span class="tech-value">India</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productImage = document.querySelector('.product-image');
+            const mainImg = document.getElementById('mainProductImg');
+            const existingZoomBox = document.querySelector('.zoom-result-box');
+
+            if (!productImage || !mainImg) return;
+
+            let zoomBox = existingZoomBox;
+
+            // If zoom box doesn't exist, create it
+            if (!zoomBox) {
+                zoomBox = document.createElement('div');
+                zoomBox.className = 'zoom-result-box';
+                zoomBox.style.display = 'none';
+
+                const zoomImg = document.createElement('img');
+                zoomImg.src = mainImg.src;
+                zoomBox.appendChild(zoomImg);
+
+                document.body.appendChild(zoomBox);
+            } else {
+                // Make sure it has the correct image
+                const zoomImg = zoomBox.querySelector('img');
+                if (zoomImg) zoomImg.src = mainImg.src;
+            }
+
+            // Mouse move for zoom
+            productImage.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Calculate percentage for zoom
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+
+                // Update CSS variables for lens effect
+                this.style.setProperty('--lens-x', x + 'px');
+                this.style.setProperty('--lens-y', y + 'px');
+
+                // Update zoom image
+                const zoomImg = zoomBox.querySelector('img');
+                if (zoomImg) {
+                    zoomImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                }
+
+                // Show zoom box
+                zoomBox.style.display = 'block';
+
+                // Position zoom box
+                let left = rect.right + 20;
+                let top = rect.top;
+
+                // Adjust if going off screen
+                if (left + zoomBox.offsetWidth > window.innerWidth) {
+                    left = rect.left - zoomBox.offsetWidth - 20;
+                }
+
+                // Ensure it stays within viewport vertically
+                if (top + zoomBox.offsetHeight > window.innerHeight) {
+                    top = window.innerHeight - zoomBox.offsetHeight - 20;
+                }
+                if (top < 0) top = 20;
+
+                zoomBox.style.left = left + 'px';
+                zoomBox.style.top = top + 'px';
+
+                // Add zooming class
+                this.classList.add('zooming');
+            });
+
+            // Hide zoom on mouse leave
+            productImage.addEventListener('mouseleave', function() {
+                this.classList.remove('zooming');
+                zoomBox.style.display = 'none';
+            });
+
+            // Thumbnail click functionality
+            const thumbnails = document.querySelectorAll('.thumbnail-item');
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    const newSrc = this.querySelector('img').src;
+                    mainImg.src = newSrc;
+
+                    // Update zoom box image
+                    const zoomImg = zoomBox.querySelector('img');
+                    if (zoomImg) zoomImg.src = newSrc;
+
+                    // Update active state
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>

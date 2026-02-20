@@ -1,0 +1,108 @@
+/* Container style */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Table style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Table head */
+thead tr {
+    background-color: #007bff;
+    color: white;
+}
+
+thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Table body rows */
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+    tbody tr:hover {
+        background-color: #f1f7ff;
+    }
+
+/* Table cells */
+tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+/* Action button */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+/* Responsive: stack table on small screens */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+        thead tr {
+            display: none;
+        }
+
+        tbody tr {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+
+        tbody td {
+            padding: 10px 15px;
+            text-align: right;
+            position: relative;
+        }
+
+            tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                top: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                color: #555;
+                text-align: left;
+            }
+}

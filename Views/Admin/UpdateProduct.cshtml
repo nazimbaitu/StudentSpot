@@ -1,0 +1,92 @@
+﻿@model StudentSpot.Models.Product
+
+<h2 style="text-align:center; text-transform:uppercase; letter-spacing:4px;">
+    Update / Edit Product
+</h2>
+
+<form method="post" enctype="multipart/form-data" class="custom-form">
+    <h2 style="text-align:center; text-transform:uppercase; letter-spacing:4px;">
+        Update / Edit Product </h2>
+    <input type="hidden" name="product_id" value="@Model.product_id" />
+
+    <label>Product Name</label>
+    <input type="text" name="product_name" placeholder="Enter Product Name" value="@Model.product_name" />
+
+    <label>Product Price</label>
+    <input type="text" name="product_price" placeholder="Enter Product Price" value="@Model.product_price" />
+
+    <label>Product Description</label>
+    <input type="text" name="product_description" placeholder="Enter Product Description" value="@Model.product_description" />
+
+    <label>Category ID</label>
+    @Html.Partial("CategoryDropdown", ViewData["category"])
+
+    <label>Current Product Image</label><br />
+    <img src="~/products_image/@Model.product_image" height="80px" width="80px" style="margin-bottom:10px;" /><br />
+
+    <label>Upload New Image</label>
+    <input type="file" name="productImage" />
+
+    <input type="hidden" name="existingImage" value="@Model.product_image" />
+
+    <input type="submit" value="Update Product" />
+</form>
+
+<style>
+    .custom-form {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 25px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+        .custom-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .custom-form input[type="text"],
+        .custom-form input[type="file"],
+        .custom-form input[type="password"],
+        .custom-form input[type="number"],
+        .custom-form input[type="email"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+            .custom-form input[type="text"]:focus,
+            .custom-form input[type="file"]:focus,
+            .custom-form input[type="password"]:focus {
+                border-color: #007bff;
+                box-shadow: 0px 0px 6px rgba(0,123,255,0.5);
+            }
+
+        .custom-form input[type="submit"] {
+            width: 100%;
+            background: #007bff;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .custom-form input[type="submit"]:hover {
+                background: #0056b3;
+            }
+</style>

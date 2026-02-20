@@ -1,0 +1,101 @@
+/* ===========================
+   Customer Registration Form CSS
+   =========================== */
+
+/* Background image for full section */
+.register-background {
+    background: url('/body/images 2.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Optional: overlay (if image too bright) */
+/* 
+.register-background::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+*/
+
+/* Main Form Container */
+#customer-registration-form {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.95); /* slightly transparent white */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 1;
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+/* Labels */
+.registration-form label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Inputs */
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect */
+.registration-form input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+}
+
+/* Submit Button */
+.registration-form button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .registration-form button:hover {
+        background-color: #45a049;
+    }
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    #customer-registration-form {
+        width: 90%;
+        padding: 20px;
+    }
+}

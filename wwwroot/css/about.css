@@ -1,0 +1,325 @@
+/* about.css */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hide navbar and footer */
+.navbar, nav, header, footer, .footer {
+    display: none !important;
+}
+
+/* Hero Section */
+.zh-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+
+.zh-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: fadeInDown 1s ease;
+}
+
+.zh-desc {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    opacity: 0.95;
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+/* Section Styles */
+.section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #333;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 2px;
+    }
+
+/* Mission Section - Different Background */
+.mission-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9eef5 100%);
+    padding: 80px 20px;
+}
+
+.mission-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.mission-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+}
+
+    .mission-text p:last-child {
+        margin-bottom: 0;
+    }
+
+.mission-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+    .mission-image img:hover {
+        transform: scale(1.02);
+    }
+
+/* Values Section - Different Background */
+.values-section {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e6ecfe 100%);
+    padding: 80px 20px;
+}
+
+.values-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.value-card {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+    .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 40px rgba(102, 126, 234, 0.2);
+    }
+
+.value-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+    transform: rotate(360deg);
+}
+
+.value-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.value-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* CTA Section - Different Background */
+.cta-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 60px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+    .cta-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .cta-content p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+    }
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        background: #f8f9fa;
+    }
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .zh-title {
+        font-size: 2.5rem;
+    }
+
+    .zh-desc {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    .section {
+        padding: 60px 20px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .mission-container {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+
+    .mission-image {
+        order: -1;
+    }
+
+        .mission-image img {
+            height: 300px;
+        }
+
+    .values-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cta-content {
+        padding: 40px 20px;
+    }
+
+        .cta-content h2 {
+            font-size: 2rem;
+        }
+}
+
+@media (max-width: 480px) {
+    .zh-title {
+        font-size: 2rem;
+    }
+
+    .value-card {
+        padding: 30px 20px;
+    }
+
+    .value-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* Ensure no navbar/footer appears */
+nav, .navbar, header, footer, .footer, .main-header, .main-footer {
+    display: none !important;
+}
+
+/* Add spacing at the top */
+.zh-hero {
+    margin-top: 0;
+    padding-top: 100px;
+}

@@ -1,0 +1,132 @@
+﻿ @model StudentSpot.Models.Bestblog
+
+@{
+    ViewData["Title"] = "Add Blog";
+    Layout = "~/Views/Shared/_Dashbord.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Blog</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group input[type="text"],
+            .form-group textarea,
+            .form-group input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+        .image-preview {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+            .image-preview img {
+                max-width: 200px;
+                max-height: 200px;
+                object-fit: cover;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+
+        .form-submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .form-submit-btn:hover {
+                background-color: #218838;
+            }
+
+        form h1, form h2, form h3 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <form asp-action="AddBlog" method="post" enctype="multipart/form-data">
+        <h2>Add Blog</h2>
+        <div class="form-group">
+            <input asp-for="blog_name" placeholder="Enter Blog Name" required />
+        </div>
+
+        <div class="form-group">
+            <textarea asp-for="blog_description" placeholder="Enter Blog Description" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="file" name="blog_image" id="blog_image" accept="image/*" />
+            <div class="image-preview" id="previewBox">
+                <img id="previewImage" src="https://via.placeholder.com/150" alt="Image Preview" />
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model?.blog_image))
+            {
+                <div class="image-preview mt-2">
+                    <p>Uploaded Image:</p>
+                    <img src="@Url.Content("~/blog_image/" + Model.blog_image)" alt="Uploaded" width="150" />
+                </div>
+            }
+        </div>
+
+        <input type="submit"  value="Add Blog" class="form-submit-btn" />
+    </form>
+
+    <script>
+        const input = document.getElementById("blog_image");
+        const previewImage = document.getElementById("previewImage");
+
+        input.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html> 

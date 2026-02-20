@@ -1,0 +1,38 @@
+﻿@model IEnumerable<StudentSpot.Models.Feedback>
+
+@{
+    ViewData["Title"] = "All Feedback";
+  
+}
+<link rel="stylesheet" href="~/css/FeedbackAdmin.css" />
+<div class="container">
+    <h2>All Feedback</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fb in Model)
+            {
+                <tr>
+                    <td>@fb.id</td>
+                    <td>@fb.name</td>
+                    <td>@fb.message</td>
+                    <td>
+                        <a href="@Url.Action("DeleteFeedback", "Admin", new { id = fb.id })"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this feedback?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

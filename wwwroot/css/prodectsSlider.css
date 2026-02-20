@@ -1,0 +1,93 @@
+﻿
+/* ===== SLIDER SECTION ===== */
+.amazon-slider-section {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    transition: background 0.6s ease;
+}
+
+    /* Bottom fade effect (Amazon style) */
+    .amazon-slider-section::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(to bottom, transparent, white);
+    }
+
+/* ===== SLIDER ===== */
+.amazon-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+/* ===== SLIDE ===== */
+.amazon-slide {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    padding: 40px;
+}
+
+    .amazon-slide img {
+        width: 380px;
+        height: 280px;
+        object-fit: contain;
+    }
+
+/* TEXT */
+.slide-content h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.slide-content p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #111;
+}
+
+.btn-view {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 12px 25px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+/* ===== ARROWS ===== */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    border: none;
+    padding: 14px;
+    cursor: pointer;
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: 20px;
+}
+
+/* ===== ALL PRODUCTS WHITE ===== */
+.all-products-section {
+    background: white;
+    margin-top: -70px;
+    padding-top: 80px;
+}
