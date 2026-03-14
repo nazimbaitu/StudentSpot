@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-
-using System.Text;
 using StudentSpot.Models;
-using StudentSpot.Services;
-using Microsoft.OpenApi.Models;
 
 namespace StudentSpot
 {
@@ -16,7 +10,7 @@ namespace StudentSpot
             var builder = WebApplication.CreateBuilder(args);
 
             // ===============================
-            // MVC + JSON Cycle Fix
+            // MVC + API + JSON Cycle Fix
             // ===============================
             builder.Services.AddControllersWithViews()
                 .AddJsonOptions(options =>
@@ -26,15 +20,17 @@ namespace StudentSpot
                 });
 
             // ===============================
-            // Database
+            // Database Connection
             // ===============================
             builder.Services.AddDbContext<myData>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Students")));
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("Students")));
 
             // ===============================
-            // Session
+            // Session (For MVC Login)
             // ===============================
             builder.Services.AddDistributedMemoryCache();
+
             builder.Services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -43,78 +39,18 @@ namespace StudentSpot
             });
 
             // ===============================
-            // JWT (Only for API - No Default Scheme)
+            // HttpClient (Optional)
             // ===============================
-            builder.Services.AddScoped<TokenService>();
-
-            var jwtSettings = builder.Configuration.GetSection("Jwt");
-            var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
-
-            builder.Services.AddAuthentication()
-                .AddJwtBearer("ApiScheme", options =>
-                {
-                    options.RequireHttpsMetadata = false;
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtSettings["Issuer"],
-                        ValidAudience = jwtSettings["Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(key)
-                    };
-                });
-
-            // ===============================
-            // Swagger
-            // ===============================
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "StudentSpot API",
-                    Version = "v1"
-                });
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "Enter: Bearer {your token}",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        new string[] {}
-                    }
-                });
-            });
-
             builder.Services.AddHttpClient();
 
             var app = builder.Build();
 
             // ===============================
-            // Development
+            // Development Settings
             // ===============================
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
@@ -122,14 +58,11 @@ namespace StudentSpot
 
             app.UseRouting();
 
-            // ✅ Correct session order
+            // Session MUST be before MVC
             app.UseSession();
-            app.UseAuthentication();
-            app.UseAuthorization();
-
 
             // ===============================
-            // MVC Route
+            // MVC Default Route
             // ===============================
             app.MapControllerRoute(
                 name: "default",

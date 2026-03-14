@@ -670,7 +670,28 @@ namespace StudentSpot.Controllers
         {
             return View();
         }
+        public IActionResult MyOrders()
+        {
+            string? customerSession = HttpContext.Session.GetString("customerSession");
 
+            if (string.IsNullOrEmpty(customerSession))
+            {
+                return RedirectToAction("customerLogin");
+            }
+
+            int customerId = int.Parse(customerSession);
+
+            var orders = _context.tbl_baynow
+                .Include(b => b.Cart)
+                    .ThenInclude(c => c.Products)
+                .Include(b => b.Cart)
+                    .ThenInclude(c => c.customers)
+                .Where(b => b.Cart.customer_id == customerId)
+                .OrderByDescending(b => b.CreatedAt)
+                .ToList();
+
+            return View(orders);
+        }
 
 
     }
