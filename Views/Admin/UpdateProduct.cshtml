@@ -19,7 +19,8 @@
     <input type="text" name="product_description" placeholder="Enter Product Description" value="@Model.product_description" />
 
     <label>Category ID</label>
-    @Html.Partial("CategoryDropdown", ViewData["category"])
+    @Html.Partial("~/Views/Admin/_CategoryDropdown.cshtml",
+               (IEnumerable<StudentSpot.Models.Category>)ViewData["category"])
 
     <label>Current Product Image</label><br />
     <img src="~/products_image/@Model.product_image" height="80px" width="80px" style="margin-bottom:10px;" /><br />

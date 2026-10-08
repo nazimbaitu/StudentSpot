@@ -323,7 +323,7 @@ namespace StudentSpot.Controllers
             List<Category> categories = _context.tbl_category.ToList();
             ViewData["category"] = categories;
 
-            return View();
+            return View();  
         }
         [HttpPost]
         public IActionResult addProduct(Product prod, IFormFile product_image)

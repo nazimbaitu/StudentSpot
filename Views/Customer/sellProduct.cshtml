@@ -1,46 +1,49 @@
+@model StudentSpot.Models.Product
 @{
     ViewData["Title"] = "Sell Product";
     Layout = "~/Views/_customer.cshtml";
 }
 <link href="~/css/sell-Product.css" rel="stylesheet" />
+
 <div class="product-wrapper">
     <div class="product-box">
 
         <h2 class="form-heading">Add New Product</h2>
 
-        <form class="product-form" method="post" enctype="multipart/form-data">
+        <form class="product-form" method="post" enctype="multipart/form-data"
+              asp-action="SellProduct" asp-controller="Customer">
 
             <!-- Product Name + Price -->
             <div class="form-row">
                 <div class="field-block">
                     <label class="field-label">Product Name</label>
-                    <input type="text" name="ProductName" class="field-input" placeholder="Enter product name">
+                    <input asp-for="product_name" class="field-input" placeholder="Enter product name">
                 </div>
 
                 <div class="field-block">
                     <label class="field-label">Price</label>
-                    <input type="number" name="Price" class="field-input" placeholder="Enter price">
+                    <input asp-for="product_price" type="number" step="0.01" class="field-input">
                 </div>
             </div>
 
             <!-- Category Dropdown -->
             <div class="field-block full-width">
                 <label class="field-label">Select Category</label>
-                <select name="CategoryId" class="field-input">
+                <select asp-for="cat_id" class="field-input">
                     <option value="">-- Choose Category --</option>
 
-                    <!-- Backend se yahan categories load hongi -->
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
-
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <option value="@cat.category_id">@cat.category_name</option>
+                    }
                 </select>
             </div>
 
             <!-- Description -->
             <div class="field-block full-width">
                 <label class="field-label">Description</label>
-                <textarea name="Description" rows="4" class="field-input" placeholder="Write product description..."></textarea>
+                <textarea asp-for="product_description" rows="4"
+                          class="field-input" placeholder="Write product description..."></textarea>
             </div>
 
             <!-- Image Upload -->
@@ -56,4 +59,3 @@
 
     </div>
 </div>
-

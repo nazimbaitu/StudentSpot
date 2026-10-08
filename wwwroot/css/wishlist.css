@@ -1,0 +1,73 @@
+/* Additional Wishlist Page Optimizations */
+
+/* Responsive grid for wishlist items */
+.new-arrivals.all-products-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+/* Individual item card styling */
+.arrival-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    background: white;
+}
+
+    .arrival-item:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+/* Image container */
+.arrival-img {
+    height: 250px;
+    overflow: hidden;
+}
+
+    .arrival-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+.arrival-item:hover .arrival-img img {
+    transform: scale(1.05);
+}
+
+/* Product info section */
+.arrival-info {
+    padding: 15px;
+}
+
+.arrival-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.arrival-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Empty wishlist styling */
+.text-center.mt-5 h4 {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }

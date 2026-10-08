@@ -666,10 +666,55 @@ namespace StudentSpot.Controllers
 
             return View(wishlistProducts);
         }
+//===============================================================================
+
         public IActionResult sellProduct()
         {
+            ViewBag.Categories = _context.tbl_category.ToList();
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> sellProduct(Product model, IFormFile ProductImage)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+
+                // 📸 Image Upload
+                if (ProductImage != null)
+                {
+                    string folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProductImage.FileName);
+                    string path = Path.Combine(folder, fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ProductImage.CopyToAsync(stream);
+                    }
+
+                    model.product_image = fileName;
+                }
+
+                // 💾 Save Data
+                _context.tbl_product.Add(model);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("sellProduct");
+            }
+
+            ViewBag.Categories = _context.tbl_category.ToList();
+            return View(model);
+        }
+        //================================================================
         public IActionResult MyOrders()
         {
             string? customerSession = HttpContext.Session.GetString("customerSession");

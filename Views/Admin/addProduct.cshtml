@@ -104,7 +104,14 @@
             </div>
 
             <div class="form-group">
-                @Html.Partial("CategoryDropdown", ViewData["category"])
+                <label for="cat_id">Category</label>
+                <select name="cat_id" id="cat_id" class="form-control" required>
+                    <option value="">-- Select Category --</option>
+                    @foreach (var cat in (IEnumerable<StudentSpot.Models.Category>)ViewData["category"])
+                    {
+                        <option value="@cat.category_id">@cat.category_name</option>
+                    }
+                </select>
             </div>
 
             <input type="submit" value="Add Product" class="form-submit-btn" />

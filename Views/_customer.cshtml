@@ -9,7 +9,24 @@
    
 
     <link rel="stylesheet" href="~/css/indexCustomer.css" />
+    <style>
+            .footer-links li {
+                list-style: none;
+                margin-bottom: 8px;
+            }
+
+            .footer-links a {
+                color: #ccc;
+                text-decoration: none;
+            }
+
+                .footer-links a:hover {
+                    color: #fff;
+                }
+    </style>
+
 </head>
+
 <body>
 
     <header>
@@ -75,11 +92,7 @@
                     <li><a href="@Url.Action("fetchProducts_all", "customer")"><i class="fas fa-box"></i> Products</a></li>
                     <li><a href="@Url.Action("fetchBlog", "customer")"><i class="fas fa-blog"></i> Blog</a></li>
                     <li><a href="@Url.Action("About", "customer")"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li>
-    <a href="@Url.Action("sellProduct", "customer")">
-        <i class="fas fa-store"></i> Sell Product
-    </a>
-</li>
+                    <li> <a href="@Url.Action("sellProduct", "customer")"><i class="fas fa-store"></i> Sell Product</a></li>
                     
                     @* <li><a href="@Url.Action("fetchCart", "customer")"><i class="fas fa-shopping-cart"></i> Cart</a></li> *@
 
@@ -107,7 +120,7 @@
                         <a class="dropdown-toggle" onclick="toggleDropdown('user')"><i class="fas fa-user-circle"></i> Customer</a>
                         <div class="user-dropdown-content" id="user-dropdown">
                             <a href="@Url.Action("customerProfile","customer")"><i class="fas fa-user"></i> Profile</a>
-                            <a href="#"><i class="fas fa-shopping-bag"></i> Orders</a>
+                            <a href="@Url.Action("MyOrders","customer")"><i class="fas fa-shopping-bag"></i> Orders</a>
                             <a href="@Url.Action("Wishlist", "customer")"><i class="fas fa-heart"></i> Wishlist</a>
                         
                         </div>
@@ -130,33 +143,30 @@
                     <h3>ZelloHub</h3>
                     <p>Your one-stop shop for all student needs. We provide quality products at affordable prices for students everywhere.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/nazam.baitu.3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/nazim-khursheed-6ba662395/"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/nazim-khursheed-6ba662395/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/nazim-khursheed-6ba662395/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="@Url.Action("Index", "customer")">Home</a></li>
+                        <li><a href="@Url.Action("fetchProducts_all", "customer")">Products</a></li>
+                        <li><a href="@Url.Action("About", "customer")>About Us</a></li>
+                        <li><a href="@Url.Action("fetchBlog", "customer")">Blogs</a></li>
                         <li><a href="@Url.Action("fetchCart", "customer")">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        @* <li><a href="#">Contact Us</a></li> *@
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Categories</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Textbooks</a></li>
-                        <li><a href="#">Electronics</a></li>
-                        <li><a href="#">School Supplies</a></li>
-                        <li><a href="#">Dorm Essentials</a></li>
-                        <li><a href="#">Clothing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
+               <div class="footer-column">
+                        <h3>Categories</h3>
+                        <ul class="footer-links">
+                            @await Html.PartialAsync("fetchlistcategory", (List<Category>)ViewData["category"])
+                        </ul>
+                    </div>
+               <div class="footer-column">
                     <h3>Newsletter</h3>
                     <p>Subscribe to get special offers and student discounts</p>
                     <div class="newsletter">
