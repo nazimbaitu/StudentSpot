@@ -654,6 +654,11 @@ namespace StudentSpot.Controllers
         // Direct GET request se delete karna
         // GET: Delete Cart Item by id
         public IActionResult DeleteCart(int id)
+
+
+
+
+
         {
             var cart = _context.tbl_cart.FirstOrDefault(c => c.cart_id == id);
             if (cart == null)
